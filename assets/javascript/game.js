@@ -51,6 +51,15 @@ function startGame() {
     }
     //test to see if initial push of "_" works
     console.log(blanksLetters);
+
+    //manipulating DOM
+    //updating HTML Guesses Left Element info with numGuesses
+    document.getElementById("guesses").innerHTML = numGuesses;
+    //updating game-word Element with blanksLetters array
+    document.getElementById("game-word").innerHTML = blanksLetters;
+    //updating Letters Guessed Element info with wrongGuesses
+    document.getElementById("letters-guessed").innerHTML = wrongGuesses;
+
 };
 
 
