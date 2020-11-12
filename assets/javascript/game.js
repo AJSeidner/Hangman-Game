@@ -24,13 +24,12 @@ var numGuesses = 9;
 
 //game functions
 
-//startGame()
-//function for starting/re-starting game
 
+//declare function for starting/re-starting game
 function startGame() {
     // reset numGuesses
     numGuesses = 9;
-    // choosing gameWords
+    // choosing gameWord
     gameWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
     // break game word down into individual letters using .split method
     lettersGameWord = gameWord.split("");
@@ -62,7 +61,52 @@ function startGame() {
 
 };
 
+//declare function for checking guesses
+function checkGuess(letter) {
+    //boolean value for guessCorrect, set to false
+
+    var guessCorrect = false;
+
+    //check to see if letter exists in gameWord
+    for (var i = 0; i < gameWord.length; i++) {
+        if (gameWord[i] === letter) {
+            guessCorrect = true;
+        }
+    }
+
+    //if letter is in word, index must be determined
+
+    if (guessCorrect) {
+        //loop through word
+        for (var i = 0; i < gameWord.length; i++) {
+            if (gameWord[i] === letter) {
+
+                blanksLetters[i] = letter;
+            }
+        }
+        //test
+        console.log(blanksLetters);
+
+    } else {
+        //push letter to wrongGuesses array and subtrat from remaining guesses
+        wrongGuesses.push(letter);
+        numGuesses--;
+    }
+
+};
+
+
 
 // code to run game
-
 startGame();
+
+//to get users guess
+
+document.onkeyup = function(event)  {
+    //converts input to lowercase
+    var letterPressed = String.fromCharCode(event.keyCode).toLowerCase();
+    //check to see if pressed letter is correct
+    checkGuess(letterPressed);
+    //need code to end round
+
+};
