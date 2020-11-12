@@ -38,6 +38,19 @@ function startGame() {
     numBlanks = lettersGameWord.length;
     // test
     console.log(gameWord);
+
+    //reset for blanksLetters array for each game
+    blanksLetters = [];
+    //reset for wrongGuesses array for each game
+    wrongGuesses = [];
+
+    //we push '_' to blanksLetters array based off numBlanks length
+
+    for (var i = 0; i < numBlanks; i++) {
+        blanksLetters.push("_");
+    }
+    //test to see if initial push of "_" works
+    console.log(blanksLetters);
 };
 
 
