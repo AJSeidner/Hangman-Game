@@ -2,7 +2,7 @@
 
 
 //array of word options
-var hangmanWords = ["goliath", "gargoyles", "xanatos", "demona", "brooklyn", "lexington", "broadway", "elisa", "bronx", "hudson"];
+const hangmanWords = ["goliath", "gargoyles", "xanatos", "demona", "brooklyn", "lexington", "broadway", "elisa", "bronx", "hudson"];
 
 //following global variables will be updated based off gameplay, initial setting defined.
 //word that will be chosen from array
@@ -95,6 +95,35 @@ function checkGuess(letter) {
 
 };
 
+//code needed to update DOM after each keystroke
+
+function turnTaken() {
+    //update HTML to reflect the effects of turnTaken
+    document.getElementById("guesses").innerHTML = numGuesses;
+    document.getElementById("game-word").innerHTML = blanksLetters.join(" ");
+    document.getElementById("letters-guessed").innerHTML = wrongGuesses.join(" ");
+
+    //if all letters match
+
+    if (lettersGameWord.toString() === blanksLetters.toString()) {
+        //increase win counts
+        winCounter++;
+        alert("You win!");
+
+
+        //update win counter element, restart game
+        document.getElementById("wins").innerHTML = winCounter;
+        startGame();
+    } else if (numGuesses === 0) {
+        lossCounter++;
+        alert("You lose");
+
+        document.getElementById("losses").innerHTML = lossCounter;
+        startGame();
+    }
+
+}
+
 
 
 // code to run game
@@ -107,6 +136,7 @@ document.onkeyup = function(event)  {
     var letterPressed = String.fromCharCode(event.keyCode).toLowerCase();
     //check to see if pressed letter is correct
     checkGuess(letterPressed);
-    //need code to end round
+    //need to run turnTaken to update DOM
+    turnTaken();
 
 };
